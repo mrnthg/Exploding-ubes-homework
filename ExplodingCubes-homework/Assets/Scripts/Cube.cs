@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
@@ -9,7 +7,24 @@ public class Cube : MonoBehaviour
     private void OnMouseDown()
     {
         _explosion—ontroller.SpawnNewCubes(gameObject);
-        _explosion—ontroller.Explode();
         Destroy(gameObject);
     }
+
+    //private void FixedUpdate()
+    //{
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //        RaycastHit hitInfo;
+    //        if (Physics.Raycast(ray, out hitInfo))
+    //        {
+    //            Debug.Log("smt");
+    //            if (hitInfo.collider.gameObject.tag == "Cubes")
+    //            {
+    //                Debug.Log("tag");
+
+    //            }
+    //        }
+    //    }
+    //}
 }

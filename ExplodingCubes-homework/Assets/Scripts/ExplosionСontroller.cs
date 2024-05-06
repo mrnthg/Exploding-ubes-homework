@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,8 +33,10 @@ public class Explosion—ontroller : MonoBehaviour
                 GameObject cubes = Instantiate(_newCube, position, Quaternion.identity);
                 cubes.transform.SetParent(transform);
             }
-
+           
             _maxProbability = _maxProbability / divisorNumber;
+
+            Explode();   
         }
     }
 
