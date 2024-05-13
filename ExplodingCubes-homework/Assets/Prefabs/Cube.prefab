@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "_explosion\u0421ontroller": {fileID: 0}
+  _probabilityFission: 100

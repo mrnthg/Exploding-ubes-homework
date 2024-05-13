@@ -364,7 +364,6 @@
 "Assets/Scripts/Cube.cs"
 "Assets/Scripts/ExplosionСontroller.cs"
 "Assets/Scripts/MaterialPool.cs"
-"Assets/Scripts/ProbabilityFission.cs"
 -langversion:9.0
 
 /deterministic

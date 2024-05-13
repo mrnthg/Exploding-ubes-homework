@@ -4,53 +4,57 @@ using UnityEngine;
 public class Explosion—ontroller : MonoBehaviour
 {
     [SerializeField] private MaterialPool _material;
-    [SerializeField] private ProbabilityFission _probabilityFission;
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _explosionForce;
 
-    private GameObject _newCube;
     private int _minCountCubes = 2;
     private int _maxCountCubes = 7;
-    private float _maxProbability = 100;
+    private float _currentChanceFission = 100;
+    private float _upwardsModifier = 3f;
 
     public void SpawnNewCubes(GameObject cube)
-    {
-        _newCube = cube;
-        Vector3 position = _newCube.transform.position;
+    {        
+        Vector3 position = cube.transform.position;
+        int countCubes = GetCountCubes();
         float divisorNumber = 2;
 
-        float scaleX = _newCube.transform.localScale.x;
-        float scaleY = _newCube.transform.localScale.y;
-        float scaleZ = _newCube.transform.localScale.z;
+        float scaleX = cube.transform.localScale.x;
+        float scaleY = cube.transform.localScale.y;
+        float scaleZ = cube.transform.localScale.z;
 
-        if (_probabilityFission.CalculatingProbabilityFission(_maxProbability))
+        _currentChanceFission = cube.GetComponent<Cube>().GetChanceFission();
+
+        if (IsFissionPossible())
         {
-            for (int i = 0; i < RandomCount(); i++)
+            _currentChanceFission /= divisorNumber;
+
+            for (int i = 0; i < countCubes; i++)
             {
-                _newCube.GetComponent<Renderer>().material = _material.GetMaterial();
-                _newCube.transform.localScale = new Vector3(scaleX / divisorNumber, scaleY / divisorNumber, scaleZ / divisorNumber);                   
-
-                GameObject cubes = Instantiate(_newCube, position, Quaternion.identity);
-                cubes.transform.SetParent(transform);
+                cube.GetComponent<Renderer>().material = _material.GetMaterial();
+                cube.transform.localScale = new Vector3(scaleX / divisorNumber, scaleY / divisorNumber, scaleZ / divisorNumber);
+                
+                GameObject newCube = Instantiate(cube, position, Quaternion.identity);
+                newCube.transform.SetParent(transform);               
             }
-           
-            _maxProbability = _maxProbability / divisorNumber;
 
-            Explode();   
-        }
+            Explode(cube);   
+        }   
     }
-
-    public void Explode()
+    public float GetCurrentChanceFission()
     {
-        foreach (Rigidbody explodableObject in GetExplodableObjects())
-            explodableObject.AddExplosionForce(_explosionForce, _newCube.transform.position, _explosionRadius);
+        return _currentChanceFission;
     }
 
-    private List<Rigidbody> GetExplodableObjects()
+    private void Explode(GameObject cube)
+    {
+        foreach (Rigidbody explodableObject in GetExplodableObjects(cube))
+            explodableObject.AddExplosionForce(_explosionForce, cube.transform.position, _explosionRadius);
+    }
+
+    private List<Rigidbody> GetExplodableObjects(GameObject cube)
     {
         List<Rigidbody> cubes = new();
-
-        Collider[] hits = Physics.OverlapSphere(_newCube.transform.position, _explosionRadius);
+        Collider[] hits = Physics.OverlapSphere(cube.transform.position, _explosionRadius);
 
         foreach (Collider hit in hits)
             if (hit.attachedRigidbody != null)
@@ -59,5 +63,13 @@ public class Explosion—ontroller : MonoBehaviour
         return cubes;
     }
 
-    private int RandomCount() => Random.Range(_minCountCubes, _maxCountCubes);
+    public bool IsFissionPossible()
+    {
+        float minCount = 0;
+        float maxCount = 100;
+
+        return Random.Range(minCount, maxCount) <= _currentChanceFission;
+    }
+
+    private int GetCountCubes() => Random.Range(_minCountCubes, _maxCountCubes);
 }

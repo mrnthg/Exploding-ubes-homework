@@ -7,11 +7,8 @@ public class MaterialPool : MonoBehaviour
 
     public Material GetMaterial()
     {
-        Material material;
-
-        material = _materials[RandomCountMaterial()];
-        return material;
+        return _materials[GetRandomNumber()];
     }
 
-    private int RandomCountMaterial() => Random.Range(0, _materials.Count);
+    private int GetRandomNumber() => Random.Range(0, _materials.Count);
 }
