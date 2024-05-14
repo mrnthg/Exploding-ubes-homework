@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private Explosion—ontroller _explosion—ontroller;
+    [SerializeField] private ExplodeCubes _explodeCubes;
 
-    public float _chanceFission;
+    private float _chanceFission;
 
     private void Awake()
     {
-        _chanceFission = _explosion—ontroller.GetCurrentChanceFission();
+        _chanceFission = _explodeCubes.GetCurrentChanceFission();
     }
 
     private void OnMouseDown()
     {
-        _explosion—ontroller.SpawnNewCubes(gameObject);
+        _explodeCubes.SpawnNewCubes(gameObject);
         Destroy(gameObject);
     }
 

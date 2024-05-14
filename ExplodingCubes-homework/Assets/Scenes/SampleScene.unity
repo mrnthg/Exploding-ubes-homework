@@ -134,11 +134,15 @@ PrefabInstance:
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: _rrrr
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
+      propertyPath: _explodeCubes
+      value: 
+      objectReference: {fileID: 798917138}
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: "_explosion\u0421ontroller"
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
     - target: {fileID: 2169786355881784538, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -383,11 +387,15 @@ PrefabInstance:
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: _rrrr
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
+      propertyPath: _explodeCubes
+      value: 
+      objectReference: {fileID: 798917138}
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: "_explosion\u0421ontroller"
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
     - target: {fileID: 2169786355881784538, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -565,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 798917137}
-  - component: {fileID: 798917139}
+  - component: {fileID: 798917138}
   m_Layer: 0
   m_Name: Cubes
   m_TagString: Cubes
@@ -592,7 +600,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &798917139
+--- !u!114 &798917138
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -601,7 +609,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 798917136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3156ad6eebbb3e745b7857a4bf9a9cd9, type: 3}
+  m_Script: {fileID: 11500000, guid: 28124ab63b38236428b8b2bba95a1d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 1990366760}
@@ -922,11 +930,15 @@ PrefabInstance:
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: _rrrr
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
+      propertyPath: _explodeCubes
+      value: 
+      objectReference: {fileID: 798917138}
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: "_explosion\u0421ontroller"
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
     - target: {fileID: 2169786355881784538, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -1098,11 +1110,15 @@ PrefabInstance:
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: _rrrr
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
+      propertyPath: _explodeCubes
+      value: 
+      objectReference: {fileID: 798917138}
     - target: {fileID: 1924421639050796806, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: "_explosion\u0421ontroller"
       value: 
-      objectReference: {fileID: 798917139}
+      objectReference: {fileID: 0}
     - target: {fileID: 2169786355881784538, guid: abf709d739432fc48a38c7725d58e657, type: 3}
       propertyPath: m_RootOrder
       value: -1
