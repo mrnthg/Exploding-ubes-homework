@@ -364,6 +364,7 @@
 "Assets/Scripts/Cube.cs"
 "Assets/Scripts/ExplodeCubes.cs"
 "Assets/Scripts/MaterialPool.cs"
+"Assets/Scripts/SpawnCubes.cs"
 -langversion:9.0
 
 /deterministic
