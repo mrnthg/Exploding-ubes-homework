@@ -9,7 +9,7 @@ public class ExplodeCubes : MonoBehaviour
 
     public void Explode(Cube cube)
     {
-        List<Rigidbody> cubes = _spawner.GetRigidbody;
+        List<Rigidbody> cubes = _spawner.poolCubes;
 
         foreach (Rigidbody explodableObject in cubes)
             explodableObject.AddExplosionForce(_explosionForce, cube.transform.position, _explosionRadius);

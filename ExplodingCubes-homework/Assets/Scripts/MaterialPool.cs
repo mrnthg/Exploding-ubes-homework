@@ -5,10 +5,7 @@ public class MaterialPool : MonoBehaviour
 {
     [SerializeField] private List<Material> _materials = new List<Material>();
 
-    public Material GetMaterial()
-    {
-        return _materials[GetRandomNumber()];
-    }
+    public Material GetMaterial() => _materials[GetRandomNumber()];
 
     private int GetRandomNumber() => Random.Range(0, _materials.Count);
 }

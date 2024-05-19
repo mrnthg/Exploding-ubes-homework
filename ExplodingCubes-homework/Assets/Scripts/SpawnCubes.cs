@@ -7,10 +7,10 @@ public class SpawnCubes : MonoBehaviour
 
     private int _minCountCubes = 2;
     private int _maxCountCubes = 7;
-    private float _currentChanceFission = 100;
-    private List<Rigidbody> _rigidbodyCubes = new List<Rigidbody>();
+    private float _currentChanceFission;
+    private List<Rigidbody> _poolCubes = new List<Rigidbody>();
 
-    public List<Rigidbody> GetRigidbody => _rigidbodyCubes;
+    public List<Rigidbody> poolCubes => _poolCubes;
 
     public void SpawnNewCubes(Cube cube)
     {
@@ -22,7 +22,7 @@ public class SpawnCubes : MonoBehaviour
         float scaleY = cube.transform.localScale.y;
         float scaleZ = cube.transform.localScale.z;
 
-        _rigidbodyCubes.Clear();
+        _poolCubes.Clear();
         _currentChanceFission = cube.ChanceFission;      
 
         if (IsFissionPossible())
@@ -33,17 +33,13 @@ public class SpawnCubes : MonoBehaviour
             {
                 cube.GetComponent<Renderer>().material = _material.GetMaterial();
                 cube.transform.localScale = new Vector3(scaleX / divisorNumber, scaleY / divisorNumber, scaleZ / divisorNumber);
-               
-                GameObject newCube = Instantiate(cube.gameObject, position, Quaternion.identity);
-                _rigidbodyCubes.Add(newCube.GetComponent<Collider>().attachedRigidbody);
+
+                Cube newCube = Instantiate(cube, position, Quaternion.identity);
+                _poolCubes.Add(newCube.GetComponent<Collider>().attachedRigidbody);
                 newCube.transform.SetParent(transform);
+                newCube.SetChanceFission(_currentChanceFission);
             }
         }
-    }
-
-    public void SetCurrentChanceFission(Cube cube)
-    {
-        cube.SetChanceFission(_currentChanceFission);
     }
 
     private bool IsFissionPossible()
