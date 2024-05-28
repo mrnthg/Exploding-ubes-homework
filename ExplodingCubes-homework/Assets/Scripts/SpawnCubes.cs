@@ -1,53 +1,66 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class SpawnCubes : MonoBehaviour
 {
-    [SerializeField] private MaterialPool _material;
+    [SerializeField] private MaterialPool _material; 
+    [SerializeField] private ExplodeCubes _explodeCube;
 
     private int _minCountCubes = 2;
     private int _maxCountCubes = 7;
-    private float _currentChanceFission;
-    private List<Rigidbody> _poolCubes = new List<Rigidbody>();
 
-    public List<Rigidbody> poolCubes => _poolCubes;
+    private void OnEnable()
+    {
+        EventManager.cubeDestroyed += SpawnNewCubes;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.cubeDestroyed -= SpawnNewCubes;
+    }
 
     public void SpawnNewCubes(Cube cube)
     {
         Vector3 position = cube.transform.position;
         int countCubes = GetCountCubes();
         float divisorNumber = 2;
+        float _currentChanceFission;
 
         float scaleX = cube.transform.localScale.x;
         float scaleY = cube.transform.localScale.y;
         float scaleZ = cube.transform.localScale.z;
 
-        _poolCubes.Clear();
-        _currentChanceFission = cube.ChanceFission;      
+        _currentChanceFission = cube.ChanceFission;
 
-        if (IsFissionPossible())
+        Vector3 newScale = new Vector3(scaleX / divisorNumber, scaleY / divisorNumber, scaleZ / divisorNumber);
+
+        if (IsFissionPossible(_currentChanceFission))
         {
             _currentChanceFission /= divisorNumber;
 
             for (int i = 0; i < countCubes; i++)
             {
-                cube.GetComponent<Renderer>().material = _material.GetMaterial();
-                cube.transform.localScale = new Vector3(scaleX / divisorNumber, scaleY / divisorNumber, scaleZ / divisorNumber);
+                if (cube.TryGetComponent(out Renderer material))
+                {
+                    material.material = _material.GetMaterial();
+                }
+
+                cube.transform.localScale = newScale;
 
                 Cube newCube = Instantiate(cube, position, Quaternion.identity);
-                _poolCubes.Add(newCube.GetComponent<Collider>().attachedRigidbody);
                 newCube.transform.SetParent(transform);
                 newCube.SetChanceFission(_currentChanceFission);
+                
+                _explodeCube.Explode(newCube);
             }
         }
     }
 
-    private bool IsFissionPossible()
+    private bool IsFissionPossible(float chanceFission)
     {
         float minCount = 0;
         float maxCount = 100;
 
-        return Random.Range(minCount, maxCount) <= _currentChanceFission;
+        return Random.Range(minCount, maxCount) <= chanceFission;
     }
 
     private int GetCountCubes() => Random.Range(_minCountCubes, _maxCountCubes);
