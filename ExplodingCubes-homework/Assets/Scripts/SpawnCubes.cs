@@ -49,9 +49,15 @@ public class SpawnCubes : MonoBehaviour
                 Cube newCube = Instantiate(cube, position, Quaternion.identity);
                 newCube.transform.SetParent(transform);
                 newCube.SetChanceFission(_currentChanceFission);
-                
+                newCube.UpExplosionForce();
+                newCube.UpExplosionRadius();
+
                 _explodeCube.Explode(newCube);
             }
+        }
+        else
+        {
+            EventManager.OnDisappeared(cube);
         }
     }
 
